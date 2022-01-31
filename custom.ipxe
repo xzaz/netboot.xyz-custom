@@ -1,12 +1,8 @@
 #!ipxe
-###
-### netboot.xyz-custom menu
-###
 
-:start
-echo Hello world test!
-sleep 10
-goto custom_exit
-
-:custom_exit
-exit 0
+set server_ip 192.168.178.102
+set nfs_path /assets/xubuntu-20.04.3-desktop-amd64
+kernel nfs://${server_ip}${nfs_path}/casper/vmlinuz.efi || read void
+initrd nfs://${server_ip}${nfs_path}/casper/initrd.lz || read void
+imgargs vmlinuz.efi initrd=initrd.lz root=/dev/nfs boot=casper netboot=nfs nfsroot=${server_ip}:${nfs_path} ip=dhcp splash quiet -- || read void
+boot || read void
