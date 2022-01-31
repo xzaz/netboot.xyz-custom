@@ -1,9 +1,9 @@
 #!ipxe
 
-echo v1
+echo v2
 set server_ip 192.168.178.102:8086
 set tftp_path /xubuntu-20.04.3-desktop-amd64
 kernel http://${server_ip}${tftp_path}/casper/vmlinuz || read void
 initrd http://${server_ip}${tftp_path}/casper/initrd || read void
-imgargs vmlinuz initrd=initrd root=/dev/nfs boot=casper netboot=nfs nfsroot=${server_ip}:${nfs_path} ip=dhcp splash quiet -- || read void
+imgargs vmlinuz initrd=initrd root=/dev/nfs boot=casper netboot=nfs nfsroot=${server_ip}:${tftp_path} ip=dhcp splash quiet -- || read void
 boot || read void
