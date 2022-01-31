@@ -1,5 +1,6 @@
 #!ipxe
 
+echo v1
 set server_ip 192.168.178.102:8086
 set tftp_path /xubuntu-20.04.3-desktop-amd64/
 kernel http://${server_ip}${tftp_path}/casper/vmlinuz.efi || read void
